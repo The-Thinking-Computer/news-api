@@ -1,0 +1,12 @@
+[
+    {
+        "title": "WNEP",
+        "url": "wnep.com",
+        "feed_url": "wnep.com/feed"
+    },
+    {
+        "title": "Philly Voice",
+        "url": "phillyvoice.com",
+        "feed_url": "https://www.phillyvoice.com/feed/section/news/"
+    }
+]
