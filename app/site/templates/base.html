@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Aggregator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        nav ul li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+        nav ul li a:hover {
+            color: #ffd700;
+        }
+        main {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .article {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        .article h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        .article p {
+            margin-top: 10px;
+            color: #666;
+            line-height: 1.6;
+        }
+        .article p.source {
+            font-style: italic;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>News Aggregator</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Latest News</a></li>
+                <li><a href="#">Categories</a></li>
+                <li><a href="#">Sources</a></li>
+                <li><a href="#">Submit a Story</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {%block content%}
+        {%endblock content%}
+    </main>
+</body>
+</html>

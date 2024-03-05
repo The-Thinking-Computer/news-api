@@ -1,0 +1,13 @@
+{%extends 'base.html'%}
+{%block content%}
+<div class="article">
+    <h2>Title: {{ item.content.title }}</h2>
+    <p>Author: {{ item.content.author }}</p> <br>
+    <p><a href="{{ item.link }}" target="_blank">Link</a></p>
+
+    <p> {{item.content.article_content | safe}}</p>
+    <p>Abstract: {{ item.content.abstract }}</p>
+    <p class="source">Source: <a href="{{ item.parent_url }}" target="_blank">{{ item.parent_url }}</a></p>
+    <p>Link: <a href="{{ item.link }}" target="_blank">Link</a></p>
+</div><br>
+{%endblock%}
