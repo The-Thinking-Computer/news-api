@@ -1,0 +1,18 @@
+{%extends 'base.html'%}
+{%block content%}
+<h1>Latest News</h1>
+<ul>
+    {% for item in news %}
+    {% if item.content.article_content != "NOT AVAILABLE" %}
+    <div class="article">
+        <h2>Title: {{ item.content.title }}</h2>
+        <p>Author: {{ item.content.author }}</p>
+        <p>Abstract: {{ item.content.abstract }}</p>
+        <p class="source">Source: <a href="{{ item.parent_url }}" target="_blank">{{ item.parent_url }}</a></p>
+        <br>
+        <h2><a href="{{url_for('article', id=item.id)}}"> Click to read more</h2></a>
+    </div><br>
+    {% endif %}
+    {% endfor %}
+</ul>
+{%endblock content%}
