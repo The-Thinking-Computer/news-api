@@ -7,6 +7,7 @@ from gensim.test.utils import datapath
 import re
 import json
 
+
 DOCUMENT_LIST=[
     'data__2024-02-21_17-26-57.json',
     'data__2024-02-21_17-33-44.json',
