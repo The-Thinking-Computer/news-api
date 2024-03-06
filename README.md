@@ -11,7 +11,7 @@ The application runs in cycles, scraping news websites and processing articles i
 Please note that all these steps currently take place in general or as written.
 
 1. `/scraper/scraper.py` creates new Website object and grabs the latest articles. This is where scraaper functions for individual websites are stored.
-2. `'scraper/post_process.py` processes the articles and returns structured data in JSON format, written into the /data folder.
+2. `scraper/post_process.py` processes the articles and returns structured data in JSON format, written into the /data folder.
 3. `/api/categorizer.py` categorizes articles using the most recent file in /data. A Laten-Derelicht-Allocation algorithm is employed using gensim. 
 4. `/api/__init__.py` API starts up *or* verifies access to the most recent data file at the /v1/articles/today endpoint
 5. `/site/run.py` Website starts up *or* runs test to ensure that the most recent news at /v1/articles/today can be consumed and displayed on a webpage.
