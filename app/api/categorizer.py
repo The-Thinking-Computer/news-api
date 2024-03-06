@@ -80,13 +80,8 @@ for topic, words in top_words_per_topic:
     print(f"Topic {topic}: {words}")
 predefined_topics={}
 for topic, words in top_words_per_topic:
-    # Convert the words to a list
     word_list = [word for word in words]
-    # Add the topic and its corresponding word list to the converted topics dictionary
     predefined_topics[topic] = word_list
-###################################
-######THIS PART DOES NOT WORK######
-###################################
 
 # Function to calculate similarity between document and each predefined topic
 def calculate_similarity(document_words, topic_words):
@@ -94,14 +89,9 @@ def calculate_similarity(document_words, topic_words):
     similarity = len(common_words) / max(len(document_words), len(topic_words))
     return similarity
 
-# Load your list of documents
-
-# Loop through each document
 for doc in data:
-    # Preprocess the text
     document_words = doc["data"].split()  # Split text into words
     
-    # Initialize variables for topic assignment
     max_similarity = -1
     assigned_topic = None
     
@@ -112,7 +102,6 @@ for doc in data:
             max_similarity = similarity
             assigned_topic = topic
     
-    # Assign the most similar predefined topic to the document
     doc["category"] = assigned_topic
 
 # Save the updated documents
