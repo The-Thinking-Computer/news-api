@@ -26,3 +26,4 @@ Please note that all these steps currently take place in general or as written.
 - site (consumes data from the API and displays it on webpage)
   - \controllers (route functions that consume data)
   - \templates 
+- jobs (will call each of these modules to run the website, api, and data processing independently)
