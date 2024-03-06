@@ -166,12 +166,6 @@ class Website:
             all_articles.append(article)
 
 
-#####################TEST#######################
-
-WNEP=Website("WNEP","https://wnep.com","/news",WNEP_scraper)
-PAHOMEPAGE=Website("PAHOMEPAGE","https://pahomepage.com","/news",PAHOMEPAGE_scraper)
-
-    
 
 
 
