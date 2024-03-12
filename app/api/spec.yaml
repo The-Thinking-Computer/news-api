@@ -1,0 +1,37 @@
+# CMS OpenAPI
+
+openapi: 3.0.3
+
+info:
+  title: OpenAPI Spec for Blueroute News
+  version: '1.0'
+  
+externalDocs:
+  description: 'More information (for internal use) about the Blueroute News API'
+  url: 'https://blueroute.news/api/docs'
+  
+servers:
+  - url: 'https://blueroute.news/api'
+  - url: 'https://thinkingcomputer.site/{key}/blueroute.news/api'
+    variables:
+      key:
+        enum:
+         - 'publickey1'
+         - 'publickey2'
+        default: 'publickey1'
+
+tags: 
+  - name: articles
+    description: operations concerning articles
+    
+paths:
+  /articles:
+    summary: endpoints that return articles or an article
+    get:
+      tags:
+        - articles
+      responses:
+        200:
+          description: 'success'
+        400:
+          description: 'failure'
