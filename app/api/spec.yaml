@@ -35,3 +35,24 @@ paths:
           description: 'success'
         400:
           description: 'failure'
+  /authors:
+      summary: endpoints that return authors or an author
+      get:
+        tags:
+          - authors
+        responses:
+          200:
+            description: 'success'
+          400:
+            description: 'failure'
+  /categories:
+      summary: endpoints that return articles or an article
+      get:
+        tags:
+          - articles
+        responses:
+          200:
+            description: 'success'
+          400:
+            description: 'failure'
+            
