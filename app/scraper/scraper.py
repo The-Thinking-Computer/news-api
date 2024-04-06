@@ -102,7 +102,6 @@ def PAHOMEPAGE_scraper(url):
                     matched_line = match.group(0)
                     break
 
-        # Extract the content within {}
         if matched_line:
             start_index = matched_line.find('{')
             end_index = matched_line.rfind('}') + 1

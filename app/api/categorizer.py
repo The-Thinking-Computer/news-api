@@ -8,12 +8,21 @@ import re
 import json
 
 
-DOCUMENT_LIST=[
-    'data__2024-02-21_17-26-57.json',
-    'data__2024-02-21_17-33-44.json',
-    'data__2024-02-27_16-36-31.json',
-    'data__2024-02-28_14-51-50.json'
-    ]
+def get_json_files(folder_path):
+    """
+    Retrieve all JSON files within the specified folder.
+
+    Args:
+        folder_path (str): The path to the folder containing the JSON files.
+
+    Returns:
+        list: A list of file paths to the JSON files.
+    """
+    json_files = []
+    for file in os.listdir(folder_path):
+        if file.endswith('.json'):
+            json_files.append(os.path.join(folder_path, file))
+    return json_files
 data=[]
 custom_stopwords={'said','day','11','news', 'wednesday','stated','tag','city','state','items',"barre","available","worth","new","says","states","county"}
 def delete_duplicates(data):
@@ -57,7 +66,7 @@ def pre_pre_process(data):
             except:
                 continue
 
-pre_pre_process(DOCUMENT_LIST)
+pre_pre_process(get_json_files('../data'))
 data=delete_duplicates(data)
 
 def preprocess_text(text):
@@ -84,7 +93,6 @@ for topic, words in top_words_per_topic:
     word_list = [word for word in words]
     predefined_topics[topic] = word_list
 
-# Function to calculate similarity between document and each predefined topic
 def calculate_similarity(document_words, topic_words):
     common_words = set(document_words).intersection(set(topic_words))
     similarity = len(common_words) / max(len(document_words), len(topic_words))
@@ -96,7 +104,6 @@ for doc in data:
     max_similarity = -1
     assigned_topic = None
     
-    # Calculate similarity with each predefined topic
     for topic, topic_words in predefined_topics.items():
         similarity = calculate_similarity(document_words, topic_words)
         if similarity > max_similarity:
@@ -105,7 +112,6 @@ for doc in data:
     
     doc["category"] = assigned_topic
 
-# Save the updated documents
 with open("updated_data_file.json", "w") as f:
     json.dump(data, f, indent=4)
 ###################################
