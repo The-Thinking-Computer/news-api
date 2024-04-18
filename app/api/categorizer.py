@@ -46,6 +46,19 @@ def pre_pre_pre_process(object):
     print('added entry to article data')
     
 def pre_pre_process(data):
+    """
+    Perform preliminary preprocessing of data before further processing.
+
+    This function performs preliminary preprocessing of data before further processing. If the input data is a list of strings, it assumes each string represents a filename containing JSON data. It then loads each JSON file, iterates through the articles within, and applies a preliminary preprocessing step to each article using the 'pre_pre_pre_process' function.
+
+    If the input data is a string, it assumes it represents a filename containing JSON data. It loads the JSON file, iterates through the articles within, and applies the same preliminary preprocessing step to each article using the 'pre_pre_pre_process' function.
+
+    Args:
+    - data (str or list): If a list, each element is treated as a filename containing JSON data. If a string, it is treated as a single filename containing JSON data.
+
+    Returns:
+    data (list)
+    """
     if type(data)==list:
         for object in data:
             if type(object)==str:
