@@ -86,32 +86,75 @@ topics = lda_model.show_topics(formatted=False)
 
 top_words_per_topic = [(topic_idx, [word[0] for word in lda_model.show_topic(topic_idx)]) for topic_idx in range(lda_model.num_topics)]
 
+
+#########################TAKE THIS OUT################
 for topic, words in top_words_per_topic:
     print(f"Topic {topic}: {words}")
 predefined_topics={}
 for topic, words in top_words_per_topic:
     word_list = [word for word in words]
     predefined_topics[topic] = word_list
+######################TAKE THIS OUT################
+
+def get_predefined_topics(top_words_per_topic):
+    """
+    Generate predefined topics set from a list of top words per topic.
+
+    Args:
+    - top_words_per_topic (list): A list of tuples where each tuple contains a topic and its associated top words.
+
+    Returns:
+    - dict: A dictionary where keys are topic names and values are sets of top words.
+    """
+    predefined_topics = {}
+    for topic, words in top_words_per_topic:
+        print(f"Topic {topic}: {words}")
+        word_list = [word for word in words]
+        predefined_topics[topic] = set(word_list)
+    return predefined_topics
 
 def calculate_similarity(document_words, topic_words):
+    """
+    Calculate the similarity between two lists of words.
+
+    Args:
+    - document_words (List[str]): A list of words representing a document.
+    - topic_words (List[str]): A list of words representing a topic.
+
+    Returns:
+    - float: The similarity between the document and the topic, ranging from 0 to 1.
+    """
     common_words = set(document_words).intersection(set(topic_words))
     similarity = len(common_words) / max(len(document_words), len(topic_words))
     return similarity
 
-for doc in data:
-    document_words = doc["data"].split()  # Split text into words
-    
-    max_similarity = -1
-    assigned_topic = None
-    
-    for topic, topic_words in predefined_topics.items():
-        similarity = calculate_similarity(document_words, topic_words)
-        if similarity > max_similarity:
-            max_similarity = similarity
-            assigned_topic = topic
-    
-    doc["category"] = assigned_topic
+def assign_category(data, predefined_topics):
+    """
+    Assigns categories to documents based on predefined topics.
 
+    Args:
+    - data (list): A list of dictionaries representing documents.
+    - predefined_topics (dict): A dictionary where keys are topic names and values are lists of words representing each topic.
+
+    Returns:
+    None: Modifies the 'category' key of each document dictionary in place.
+    """
+    for doc in data:
+        document_words = doc["data"].split()  # Split text into words
+        
+        max_similarity = -1
+        assigned_topic = None
+        
+        for topic, topic_words in predefined_topics.items():
+            similarity = calculate_similarity(document_words, topic_words)
+            if similarity > max_similarity:
+                max_similarity = similarity
+                assigned_topic = topic
+        
+        doc["category"] = assigned_topic
+
+
+data= assign_category(data,(predefined_topics.items()))
 with open("updated_data_file.json", "w") as f:
     json.dump(data, f, indent=4)
 ###################################
