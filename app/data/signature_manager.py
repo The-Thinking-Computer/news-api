@@ -90,6 +90,18 @@ def validate_input(data):
     return False
 
 class DigitalSignatureGenerator:
+     """
+    A class for generating digital signatures using a private key.
+
+    This class provides functionality to generate digital signatures using a private key. 
+    The digital signatures can be used for data authentication and integrity verification.
+
+    Attributes:
+    - private_key_path (object): The private key used for generating digital signatures.
+
+    Methods:
+    - __init__: Initializes the DigitalSignatureGenerator object with a private key.
+    """
     def __init__(self, private_key_path):
         with open(private_key_path, "rb") as key_file:
             self.private_key = serialization.load_pem_private_key(
