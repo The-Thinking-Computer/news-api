@@ -10,6 +10,25 @@ import tools
 from post_process import clean_data
 
 def PENNS_NORTHEAST_scraper(url):
+    """
+    Scrape article content from a specific news website.
+
+    This function scrapes article content from a specific news website (PENNS_NORTHEAST) given a URL. It performs the following steps:
+    1. Strips leading and trailing whitespace from the URL.
+    2. Sends an HTTP GET request to the URL and raises an exception if the response status is not successful.
+    3. Parses the HTML content of the response using BeautifulSoup.
+    4. Extracts metadata such as title and author from the HTML.
+    5. Finds the section containing the article content.
+    6. Extracts paragraph elements from the article section.
+    7. Concatenates the text content of paragraphs into a single string representing the article content.
+    8. Returns a dictionary containing the author, title, and article content.
+
+    Args:
+    - url (str): The URL of the webpage containing the article to be scraped.
+
+    Returns:
+    - dict or str: A dictionary containing the author, title, and article content if the article is found on the provided URL. If no article is found, it returns the string "No article found on the provided URL.". If an error occurs during scraping, it returns the string "Error fetching article content.".
+    """
     try:
         url = url.strip()
         response = requests.get(url)
@@ -54,6 +73,26 @@ def PENNS_NORTHEAST_scraper(url):
         print(f"An error occurred: {e}")
         return "Error fetching article content."
 def WNEP_scraper(url):
+    """
+    Scrape article content from WNEP (NewsWatch 16) website.
+
+    This function scrapes article content from the WNEP (NewsWatch 16) website given a URL. It performs the following steps:
+    1. Strips leading and trailing whitespace from the URL.
+    2. Sends an HTTP GET request to the URL and raises an exception if the response status is not successful.
+    3. Parses the HTML content of the response using BeautifulSoup.
+    4. Finds the 'article' tag containing the main article content.
+    5. Extracts metadata such as title, author, and abstract from the 'article' tag.
+    6. Finds the 'div' element with class 'article__body' containing the article body.
+    7. Extracts paragraph elements from the article body.
+    8. Concatenates the text content of paragraphs into a single string representing the article content.
+    9. Returns a dictionary containing the author, title, abstract, and article content.
+
+    Args:
+    - url (str): The URL of the webpage containing the article to be scraped.
+
+    Returns:
+    - dict or str: A dictionary containing the author, title, abstract, and article content if the article is found on the provided URL. If no article is found, it returns the string "No article tag found on the provided URL.". If an error occurs during scraping, it returns the string "Error fetching article content.".
+    """
     try:
         url = url.strip()
         response = requests.get(url)
@@ -86,6 +125,26 @@ def WNEP_scraper(url):
         print(f"An error occurred: {e}")
         return "Error fetching article content."
 def PAHOMEPAGE_scraper(url):
+    """
+    Scrape article content from the PAHOMEPAGE website.
+
+    This function scrapes article content from the PAHOMEPAGE website given a URL. It performs the following steps:
+    1. Strips leading and trailing whitespace from the URL.
+    2. Sends an HTTP GET request to the URL and raises an exception if the response status is not successful.
+    3. Parses the HTML content of the response using BeautifulSoup.
+    4. Searches for script tags containing the JSON data for the article content.
+    5. Extracts metadata such as title, author, and description from the JSON data.
+    6. Finds the 'div' element containing the article content.
+    7. Extracts paragraph elements from the article content.
+    8. Concatenates the text content of paragraphs into a single string representing the article content.
+    9. Returns a dictionary containing the title, author, abstract, and article content.
+
+    Args:
+    - url (str): The URL of the webpage containing the article to be scraped.
+
+    Returns:
+    - dict: A dictionary containing the title, author, abstract, and article content if the article is found on the provided URL. If no article is found, it returns a dictionary with the title, author, description, and 'article_content' set to 'NOT AVAILABLE'. If an error occurs during scraping, it prints the exception and returns an empty dictionary.
+    """
     try:
         url = url.strip()
         response = requests.get(url)
@@ -102,7 +161,6 @@ def PAHOMEPAGE_scraper(url):
                     matched_line = match.group(0)
                     break
 
-        # Extract the content within {}
         if matched_line:
             start_index = matched_line.find('{')
             end_index = matched_line.rfind('}') + 1
@@ -139,6 +197,23 @@ def PAHOMEPAGE_scraper(url):
 all_articles=[]
 
 class Website:
+    """
+    Represents a website with articles to be scraped.
+
+    This class represents a website with articles to be scraped. It contains methods for recording articles from the website.
+
+    Attributes:
+    - name (str): The name of the website.
+    - parent_url (str): The base URL of the website.
+    - target_url (str): The URL of the specific page containing the articles to be scraped.
+    - links (list): A list of links extracted from the target URL.
+    - scraper (function): The function used for scraping article content from the website.
+    - articles (list): A list to store scraped articles.
+
+    Methods:
+    - __init__: Initializes the Website object with the provided attributes.
+    - record_articles: Scrapes articles from the website and records them.
+    """
     
     def __init__(self, name,parent_url,target_url,scraper,articles=None):
         self.name=name
