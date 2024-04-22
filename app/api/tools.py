@@ -17,7 +17,7 @@ def get_most_recent_file(relative_path):
     return os.path.join(folder_path, files[most_recent_index])
 
 def create_master_key():
-
+    pass
 def create_private_key(public_exponent,key_size,backend=default_backend()):
     return rsa.generate_private_key(
     public_exponent=65537,
