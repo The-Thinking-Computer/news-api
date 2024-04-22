@@ -51,6 +51,22 @@ class DatabaseManager:
         self.cursor.execute(query, (value,))
         return self.cursor.fetchone()[0] == 1
 
+     @staticmethod
+    def get_db(database_name):
+        db = getattr(Flask, '_database', None)
+        if db is None:
+            db = Flask._database = sqlite3.connect(database_name)
+        return db
+
+    @staticmethod
+    def query_db(query, args=(), one=False, database_name='articles.db'):
+        db = DatabaseManager.get_db(database_name)
+        cur = db.cursor()
+        cur.execute(query, args)
+        rv = cur.fetchall()
+        cur.close()
+        return (rv[0] if rv else None) if one else rv
+
     def commit(self):
         """
         Commit changes to the database.

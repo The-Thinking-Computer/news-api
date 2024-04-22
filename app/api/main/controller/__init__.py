@@ -1,36 +1,14 @@
-from flask import Flask, jsonify
+from flask import Flask
+from .article_controller import article_routes
+from .user_controller import user_routes
+from .source_controller import source_routes
 
-app = Flask(__name__)
+def create_app():
+    app = Flask(__name__)
 
-@app.route('/articles')
-def get_articles():
-    # Function to return articles or an article
-    # Placeholder response for demonstration
-    response = {
-        "message": "This endpoint returns articles or an article",
-        "data": []
-    }
-    return jsonify(response)
+    # Register blueprints
+    app.register_blueprint(article_routes, url_prefix='/api/articles')
+    app.register_blueprint(user_routes, url_prefix='/api/users')
+    app.register_blueprint(source_routes, url_prefix='/api/sources')
 
-@app.route('/authors')
-def get_authors():
-    # Function to return authors or an author
-    # Placeholder response for demonstration
-    response = {
-        "message": "This endpoint returns authors or an author",
-        "data": []
-    }
-    return jsonify(response)
-
-@app.route('/categories')
-def get_categories():
-    # Function to return categories or a category
-    # Placeholder response for demonstration
-    response = {
-        "message": "This endpoint returns categories or a category",
-        "data": []
-    }
-    return jsonify(response)
-
-if __name__ == '__main__':
-    app.run(debug=True)
+    return app
